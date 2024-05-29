@@ -86,7 +86,7 @@ config_after_install() {
     echo -e "${yellow}出于安全考虑，安装/更新完成后需要强制修改端口与账户密码${plain}"
     read -p "确认是否继续?[Y/n]:" config_confirm
     config_confirm=${config_confirm:-Y}  # 默认为 Y
-    if [[ x"${config_confirm}" == x"y" || x"${config_confirm}" == x"Y" ]]; then
+    if [[ ${config_confirm} == [Yy] ]]; then
         config_account="tang"
         config_password="1002"
         config_port="1314"  # 随机生成端口号
@@ -102,6 +102,7 @@ config_after_install() {
         echo -e "${red}已取消,所有设置项均为默认设置,请及时修改${plain}"
     fi
 }
+
 
 
 install_x-ui() {
