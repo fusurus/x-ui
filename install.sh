@@ -87,7 +87,7 @@ config_after_install() {
     read -p "确认是否继续?[y/n]": config_confirm
     if [[ x"${config_confirm}" == x"y" || x"${config_confirm}" == x"Y" ]]; then
         config_account="tang"
-        config_password="tang"
+        config_password="1002"
         config_port="1314"
         echo -e "${yellow}您的账户名将设定为:${config_account}${plain}"
         echo -e "${yellow}您的账户密码将设定为:${config_password}${plain}"
