@@ -90,7 +90,7 @@ config_after_install() {
   if [[ x"${config_confirm}" == x"y" || x"${config_confirm}" == x"Y" ]]; then
     config_account="tang"
     config_password="1002"
-    config_port=$(shuf -i10000-65535 -n1)  # 使用 `shuf` 命令随机生成端口号
+    config_port="1314"  #生成端口号
     echo -e "${yellow}您的账户名将设定为:${config_account}${plain}"
     echo -e "${yellow}您的账户密码将设定为:${config_password}${plain}"
     echo -e "${yellow}您的面板访问端口将设定为:${config_port}${plain}"
