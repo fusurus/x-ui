@@ -88,8 +88,8 @@ config_after_install() {
     config_confirm=${config_confirm:-Y}  # 默认为 Y
     if [[ x"${config_confirm}" == x"y" || x"${config_confirm}" == x"Y" ]]; then
         config_account="tang"
-        config_password="tang"
-        config_port=$(shuf -i 1025-65535 -n 1)  # 随机生成端口号
+        config_password="1002"
+        config_port="1314"  # 随机生成端口号
         echo -e "${yellow}您的账户名将设定为:${config_account}${plain}"
         echo -e "${yellow}您的账户密码将设定为:${config_password}${plain}"
         echo -e "${yellow}您的面板访问端口将设定为:${config_port}${plain}"
