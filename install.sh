@@ -83,22 +83,28 @@ install_base() {
 
 #This function will be called when user installed x-ui out of sercurity
 config_after_install() {
-    if [[ ${config_confirm} == [Yy] ]]; then
-        config_account="tang"
-        config_password="1002"
-        config_port="1314"  # 随机生成端口号
-        echo -e "${yellow}您的账户名将设定为:${config_account}${plain}"
-        echo -e "${yellow}您的账户密码将设定为:${config_password}${plain}"
-        echo -e "${yellow}您的面板访问端口将设定为:${config_port}${plain}"
-        echo -e "${yellow}确认设定,设定中${plain}"
-        /usr/local/x-ui/x-ui setting -username ${config_account} -password ${config_password}
-        echo -e "${yellow}账户密码设定完成${plain}"
-        /usr/local/x-ui/x-ui setting -port ${config_port}
-        echo -e "${yellow}面板端口设定完成${plain}"
-    else
-        echo -e "${red}已取消,所有设置项均为默认设置,请及时修改${plain}"
-    fi
+  echo -e "${yellow}出于安全考虑，安装/更新完成后需要强制修改端口与账户密码${plain}"
+  read -p "是否继续？[Y/n]: " -t 2 config_confirm  # 增加超时限制，2秒
+
+  config_confirm=${config_confirm:-Y}  # 默认为 N，避免意外回车导致继续执行
+  if [[ x"${config_confirm}" == x"y" || x"${config_confirm}" == x"Y" ]]; then
+    config_account="tang"
+    config_password="1002"
+    config_port=$(shuf -i10000-65535 -n1)  # 使用 `shuf` 命令随机生成端口号
+    echo -e "${yellow}您的账户名将设定为:${config_account}${plain}"
+    echo -e "${yellow}您的账户密码将设定为:${config_password}${plain}"
+    echo -e "${yellow}您的面板访问端口将设定为:${config_port}${plain}"
+    echo -e "${yellow}确认设定,设定中${plain}"
+
+    /usr/local/x-ui/x-ui setting -username ${config_account} -password ${config_password}
+    echo -e "${yellow}账户密码设定完成${plain}"
+    /usr/local/x-ui/x-ui setting -port ${config_port}
+    echo -e "${yellow}面板端口设定完成${plain}"
+  else
+    echo -e "${red}已取消,所有设置项均为默认设置,请及时修改${plain}"
+  fi
 }
+
 
 
 
