@@ -84,9 +84,8 @@ install_base() {
 #This function will be called when user installed x-ui out of sercurity
 config_after_install() {
     echo -e "${yellow}出于安全考虑，安装/更新完成后需要强制修改端口与账户密码${plain}"
-    read -p "确认是否继续?[Y/n]:" -t 2 config_confirm  # 增加超时限制，10秒
-    config_confirm=${config_confirm:-Y}  # 默认为 Y
-    if [[ ${config_confirm} == [Yy] ]]; then
+    read -p "确认是否继续?[y/n]": config_confirm
+    if [[ x"${config_confirm}" == x"y" || x"${config_confirm}" == x"Y" ]]; then
         config_account="tang"
         config_password="1002"
         config_port="1314"  # 随机生成端口号
